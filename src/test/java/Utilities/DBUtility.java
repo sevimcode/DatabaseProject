@@ -50,6 +50,22 @@ public class DBUtility{
         }
         return data;
     }
+    public static boolean verifyCreatedName(List<Map<Object,Object>> data, String firstName, String lastName) throws SQLException {
+
+
+        for (Map<Object, Object> map : data) {
+            if (map.get ("FIRST_NAME").toString ().equalsIgnoreCase (firstName)) {
+                if (map.get ("LAST_NAME").toString ().equalsIgnoreCase (lastName)) {
+                    System.out.println ("Found => FIRST NAME :" + map.get ("FIRST_NAME").toString () +
+                            "  LAST NAME :" + map.get ("LAST_NAME").toString ());
+                    return true;
+
+                }
+            }
+        }
+        System.out.println ("not found!");
+        return false;
+    }
 
     public static void close() throws SQLException {
         if ( connection!=null){
