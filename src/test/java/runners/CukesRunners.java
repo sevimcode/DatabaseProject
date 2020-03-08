@@ -12,7 +12,8 @@ import org.junit.runner.RunWith;
             features = "src/test/resources/features",
             glue = "step_definitions",
             plugin = "html:target/cucumber-reports",
-            dryRun = true
+            dryRun = false,
+            tags = "@database"
 
     )
 

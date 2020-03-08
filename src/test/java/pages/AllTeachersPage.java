@@ -17,8 +17,8 @@ public class AllTeachersPage{
     }
 
 
-    @FindBy (xpath = "//*[@id=\"app\"]/div/div/div[2]/div[last()]/div/div[1]/a")
-    public WebElement lastCreatedTeacher;
+    @FindBy (xpath = "//*[@id=\"app\"]/div/div/div[2]/div[last()]/div/h4/a")
+    public WebElement lastCreatedTeacherName;
 
     @FindBy (css = "#app > div > div > div.row.staff-grid-row > div:nth-child(1) > div > div.profile-img > a")
     public WebElement firstTeacher;

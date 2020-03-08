@@ -198,8 +198,8 @@ public class StudentPage_StepDefs{
         JavascriptExecutor js = ( (JavascriptExecutor) Driver.getDriver () );
         js.executeScript ("window.scrollBy(0,document.body.scrollHeight || document.documentElement.scrollHeight)" , "");
         Assert.assertEquals (allStudentsPage.locateStudent (firstname).getText () , firstname);
-        SeleniumUtil.pause (2);
-        allStudentsPage.locateStudent (firstname).click ();
+        SeleniumUtil.pause (5);
+        allStudentsPage.lastCreatedStudent.click ();
     }
 
     @Then("Student should be displayed on the profile page {string} {string}")

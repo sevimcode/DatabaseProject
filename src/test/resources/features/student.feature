@@ -1,5 +1,6 @@
-Feature: Teacher feature
-
+@database
+Feature: Student feature
+  @database
     Scenario Outline:
     When User on home page
     When Click Students
@@ -32,7 +33,7 @@ Examples:
    |firstname |email|password| subject|birth date|lastname|joining date|confirmpassword|mobilenumber|admissionno|major|section|address|company name|startdate|street|state|title|city|zipcode|
    |Gina | wilkinson@gmail.com| 12345| math  |01/01/1990|Wilkinson|02/02/2018|1234|7735654343|567|math|150700|45 State st. Chicago, IL 60055 |TechCom|02/02/2005|Wabash street|Illinois|Teacher|Chicago|60078|
 
-
+  @database
   Scenario Outline: Creating teacher and verifying on UI and DB
 
     Then Student should be displayed on the "<firstname>" grid
@@ -42,7 +43,7 @@ Examples:
     |firstname | lastname |
     |Gina     |Wilkinson |
 
-
+  @database
   Scenario: Updating student and verifying on UI and DB
     When User on home page
     When Click Students
@@ -56,7 +57,7 @@ Examples:
     Then Student should be updated on the profile page
     Then  Student should be updated on the database
 
-
+  @database
   Scenario: Deleting student and verifying on UI and DB
     When User on home page
     When Click Students
