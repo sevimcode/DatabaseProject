@@ -348,19 +348,21 @@ public class StudentPage_StepDefs{
 
     @Then("Student should NOT be found on list")
     public void studentShouldNOTBeFoundOnList() {
+
+   //     List<WebElement> list = Driver.getDriver ().findElements (By.xpath ("//tbody/tr[1]"));
+    //    6181 Female math 14 union IT 09/01/2020 tommie.jakubowski@hotmail.com 2244198787 // gets everthing in row 1st
+
       boolean result = false;
-        List<WebElement> list = Driver.getDriver ().findElements (By.xpath ("//tbody/tr[1]"));
-        String [] listID = new String[list.size ()];
-       for (int i = 0; i<list.size () ; i++) {
-           listID [i] = Driver.getDriver ().findElement (By.xpath ("//tbody/tr[1]/td[" + i+2 + "]")).getText ();
-       }
+        List<WebElement> list = Driver.getDriver ().findElements (By.xpath ("//tbody/tr/td[2]"));
+
         SeleniumUtil.pause (1);
         for (int i = 0; i<list.size () ; i++) {
-            if (!Objects.equals (listID[ i ] , TemporaryStorage.getData ("ID_firstStudent"))){
-                System.out.println (listID[i]);
-             result = true;
+            System.out.println (list.get (i).getText ());
+            if (!list.get (i).getText ().equals (TemporaryStorage.getData ("ID_firstStudent"))){
+                result = true;
             }
         }
+        System.out.println (TemporaryStorage.getData ("ID_firstStudent"));
         Assert.assertTrue (result);
     }
 
