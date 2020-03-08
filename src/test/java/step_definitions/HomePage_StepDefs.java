@@ -24,7 +24,7 @@ public class HomePage_StepDefs{
         Driver.getDriver ().get (Config.getProperty ("urlWebsite"));
     }
 
-    @When("User should be able to click Teachers")
+    @When("Click Teachers")
     public void user_should_be_able_to_click_Teachers() {
        homePage.teachers.click ();
     }
@@ -34,7 +34,7 @@ public class HomePage_StepDefs{
         Assert.assertTrue (homePage.allTeachers.isDisplayed ());
     }
 
-    @When("User should be able to click All Teachers")
+    @When("Click All Teachers")
     public void user_should_be_able_to_click_All_Teachers() {
         homePage.allTeachers.click ();
 
@@ -45,7 +45,7 @@ public class HomePage_StepDefs{
         Assert.assertTrue (homePage.addTeacher.isDisplayed ());
     }
 
-    @When("User should be able to click Add Teacher")
+    @When("Click Add Teacher")
     public void user_should_be_able_to_click_Add_Teacher() {
         homePage.addTeacher.click ();
 

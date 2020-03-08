@@ -43,7 +43,7 @@ Examples:
     |Gina     |Wilkinson |
 
 
-  Scenario: Updating teacher and verifying on UI and DB
+  Scenario: Updating student and verifying on UI and DB
     When User on home page
     When Click Students
     When Click All Student
@@ -52,12 +52,12 @@ Examples:
     And Click Students
     And Click All Student
     And Click edit button on the first student
-    When Update email and submit
+    When Update subject and submit
     Then Student should be updated on the profile page
     Then  Student should be updated on the database
 
 
-  Scenario: Deleting teacher and verifying on UI and DB
+  Scenario: Deleting student and verifying on UI and DB
     When User on home page
     When Click Students
     When Click All Student

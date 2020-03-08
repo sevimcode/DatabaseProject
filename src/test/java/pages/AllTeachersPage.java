@@ -17,13 +17,34 @@ public class AllTeachersPage{
     }
 
 
+    @FindBy (xpath = "//*[@id=\"app\"]/div/div/div[2]/div[last()]/div/div[1]/a")
+    public WebElement lastCreatedTeacher;
 
+    @FindBy (css = "#app > div > div > div.row.staff-grid-row > div:nth-child(1) > div > div.profile-img > a")
+    public WebElement firstTeacher;
+
+    @FindBy (xpath = "(//i[@class='fa fa-ellipsis-v'])[2]")
+    public WebElement threeDots;
+    @FindBy (xpath = "//i[@class='fa fa-pencil m-r-5']")
+    public WebElement edit;
+
+    @FindBy (xpath = "//i[@class='fa fa-trash-o m-r-5']")
+    public WebElement delete;
+
+    @FindBy (xpath = "//form/div/div/button")
+    public WebElement alertDelete;
+
+    @FindBy (xpath = "//div[@class='dropdown-menu dropdown-menu-right'][last()]")
+    public WebElement dropDownMenu;
+
+    @FindBy (xpath = "//a[2]/i")
+    public WebElement listButton;
 
     @FindBy (xpath = "//a[@href='teachers-list.html']")
     public WebElement listToggleButton;
 
 
-    @FindBy (xpath = "//*[@id='app']/div/div/div[2]/div[last()]/div/div/a")
-    public WebElement lastCreatedTeacher;
+//    @FindBy (xpath = "//*[@id='app']/div/div/div[2]/div[last()]/div/div/a")
+//    public WebElement lastCreatedTeacher;
 
 }
