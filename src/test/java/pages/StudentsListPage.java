@@ -13,6 +13,21 @@ public class StudentsListPage{
         PageFactory.initElements (Driver.getDriver (), this);
     }
 
+    @FindBy (xpath = "//input")
+    public WebElement searchBox;
+
+    @FindBy (xpath = "//*[@id=\"app\"]/div/div[3]/div[1]/div[4]/a")
+    public WebElement searchButton;
+
+
+    @FindBy (xpath = "//*[@id=\"DataTables_Table_0\"]/tbody/tr/td")
+    public WebElement noDataMessage;
+
+    //*[@id="DataTables_Table_0_info"]
+    @FindBy (xpath = " //*[@id=\"DataTables_Table_0_info\"]")
+    public WebElement entryCount;
+
+
     @FindBy (className = "fa fa-th")
     public WebElement listGridButton;
 

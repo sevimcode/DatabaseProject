@@ -29,7 +29,7 @@ public class HomePage{
     @FindBy (xpath = "//span[contains(text(),'Students')]")
     public WebElement students;
 
-    @FindBy (xpath = "//span[contains(text(),'All Student')]")
+    @FindBy (xpath = "//a[contains(text(),'All Students')]")
     public WebElement allStudents;
 
     @FindBy (xpath = "//a[contains(text(),'Add Student')]")
