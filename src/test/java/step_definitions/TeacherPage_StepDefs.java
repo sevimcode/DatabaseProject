@@ -143,22 +143,12 @@ public class TeacherPage_StepDefs{
         JavascriptExecutor js = ( (JavascriptExecutor) Driver.getDriver () );
         js.executeScript ("window.scrollBy(0,document.body.scrollHeight || document.documentElement.scrollHeight)" , "");
         SeleniumUtil.pause (3);
-        Assert.assertTrue (allTeachersPage.lastCreatedTeacher.isDisplayed ());
+        Assert.assertEquals (allTeachersPage.lastCreatedTeacherName.getText (), TemporaryStorage.getData ("FIRST_NAME"));
+        allTeachersPage.lastCreatedTeacherName.click ();
         SeleniumUtil.pause (2);
-        js.executeScript ("window.scrollBy(0,-document.body.scrollHeight || -document.documentElement.scrollHeight)" , "");
-        allTeachersPage.lastCreatedTeacher.click ();
         String ID = profilePage.ID.getText ();
         TemporaryStorage.addData ("ID" , ID);
-        JavascriptExecutor jse = (JavascriptExecutor) Driver.getDriver ();
-        jse.executeScript ("window.history.go(-1)");
-    }
 
-    @Then("User should be able to click list toggle button on All Teachers")
-    public void userShouldBeAbleToClickListToggleButtonOnAddTeachers() {
-        WebDriverWait webDriverWait = new WebDriverWait (Driver.getDriver () , 10);
-        webDriverWait.until (ExpectedConditions.visibilityOf (allTeachersPage.listToggleButton));
-        Actions actions = new Actions(Driver.getDriver ());
-        actions.moveToElement(allTeachersPage.listToggleButton).click().perform();
     }
 
 
@@ -229,7 +219,7 @@ public class TeacherPage_StepDefs{
         JavascriptExecutor js = ( (JavascriptExecutor) Driver.getDriver () );
         js.executeScript ("window.scrollBy(0,document.body.scrollHeight || document.documentElement.scrollHeight)" , "");
         SeleniumUtil.pause (2);
-        allTeachersPage.lastCreatedTeacher.click ();
+        allTeachersPage.lastCreatedTeacherName.click ();
         SeleniumUtil.pause (2);
         String ID = profilePage.subject.getText ();
         Assert.assertEquals (profilePage.subject.getText () , ( TemporaryStorage.getData ("SUBJECT_UPDATED") ));
@@ -335,6 +325,11 @@ public class TeacherPage_StepDefs{
 
 
     }
+
+
+
+
+
 
 
 

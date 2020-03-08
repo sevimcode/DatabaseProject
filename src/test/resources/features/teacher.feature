@@ -1,4 +1,6 @@
+@database
 Feature: Teacher feature
+  @database
 Scenario: Creating teacher and verifying on UI and DB
   When User on home page
   When Click Teachers
@@ -8,10 +10,9 @@ Scenario: Creating teacher and verifying on UI and DB
   When Click Teachers
   When Click All Teacher
   Then Teacher should be displayed on the teacher grid
-  When User should be able to click list toggle button on All Teachers
   Then Teacher should be created on the database
 
-
+  @database
   Scenario: Updating teacher and verifying on UI and DB
     When User on home page
     When Click Teachers
@@ -25,7 +26,7 @@ Scenario: Creating teacher and verifying on UI and DB
     Then Teacher should be updated on the profile page
     Then  Teacher should be updated on the database
 
-
+  @database
   Scenario: Deleting teacher and verifying on UI and DB
     When User on home page
     When Click Teachers
