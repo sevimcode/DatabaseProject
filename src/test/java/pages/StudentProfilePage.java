@@ -15,8 +15,10 @@ public class StudentProfilePage{
     @FindBy(xpath = "//ul/li/span[2]/a")
     public WebElement ID;
 
-    @FindBy (xpath = "//ul/li[3]/span[2]/a")
-    public WebElement email;
+    @FindBy (xpath = "//ul/li[9]/span[2]")
+    public WebElement subject;
+
+
 
     @FindBy (xpath ="//div[@class=\"profile-info-left\"]/h3")
     public WebElement fullName;

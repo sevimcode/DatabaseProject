@@ -40,8 +40,6 @@ public class TeachersListPage{
     @FindBy (xpath = "//tbody/tr[1]/td[8]/button")
     public WebElement firstColumntableDeleteButton;
 
-
-
     @FindBy (xpath = "//tbody/tr/td[8]/button/preceding-sibling::*")
     public WebElement editButton;
     @FindBy (xpath = "//tbody/tr/td[8]/button")

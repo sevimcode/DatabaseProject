@@ -44,18 +44,30 @@ Examples:
 
 
   Scenario: Updating teacher and verifying on UI and DB
+    When User on home page
     When Click Students
-    And Click edit button on the last created student "<firstname>"
+    When Click All Student
+    And Click first student
+    When Get ID from profile page
+    And Click Students
+    And Click All Student
+    And Click edit button on the first student
     When Update email and submit
     Then Student should be updated on the profile page
     Then  Student should be updated on the database
 
 
   Scenario: Deleting teacher and verifying on UI and DB
+    When User on home page
+    When Click Students
     When Click All Student
-    When Find student
-    And  Click delete button on the grid
-    When Click alert box delete button
-    Then Student should NOT be displayed on the be displayed
+    When Click first student
+    When Get ID from profile page
+    When Click Students
+    When Click All Student
+    And  Click delete button on the first student
+    When Click delete button on the alert box
+    When Click list toggle button
+    Then Student should NOT be found on list
     Then  Student should be deleted on the database
 
