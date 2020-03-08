@@ -6,9 +6,7 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.junit.Assert;
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -144,7 +142,7 @@ public class TeacherPage_StepDefs{
 
         JavascriptExecutor js = ( (JavascriptExecutor) Driver.getDriver () );
         js.executeScript ("window.scrollBy(0,document.body.scrollHeight || document.documentElement.scrollHeight)" , "");
-        SeleniumUtil.pause (2);
+        SeleniumUtil.pause (3);
         Assert.assertTrue (allTeachersPage.lastCreatedTeacher.isDisplayed ());
         SeleniumUtil.pause (2);
         js.executeScript ("window.scrollBy(0,-document.body.scrollHeight || -document.documentElement.scrollHeight)" , "");
@@ -163,24 +161,9 @@ public class TeacherPage_StepDefs{
         actions.moveToElement(allTeachersPage.listToggleButton).click().perform();
     }
 
-    @Then("Teacher should be created on the teacher list")
-    public void teacherShouldBeAbleToBeUpdatedOnTheTeacherList() {
-
-        SeleniumUtil.pause (2);
-        teachersListPage.headerTableID.click ();
-        SeleniumUtil.pause (2);
-        teachersListPage.headerTableID.click ();
-        SeleniumUtil.pause (2);
-        Assert.assertEquals (teachersListPage.firstColumnTableID.getText () , TemporaryStorage.getData ("ID"));
-
-    }
 
     @Then("Teacher should be created on the database")
     public void teacherShouldBeAbleToBeCreatedOnTheDatabase() throws SQLException {
-
-        String[] keyNames = { "TEACHER_ID" , "FIRST_NAME" , "EMAIL_ADDRESS" , "PASSWORD" , "SUBJECT" ,
-                "GENDER" , "BIRTH_DATE" , "BATCH" , "LAST_NAME" , "JOIN_DATE" ,
-                "PHONE" , "DEPARTMENT" , "SALARY" , "SECTION" , "PREMANENT_ADDRESS" };
 
         DBUtility.createConnection ();
 
@@ -199,163 +182,160 @@ public class TeacherPage_StepDefs{
 
  //UPDATING TEACHER SCENARIO
 
-    @When("User should be able to click All Teacher")
-    public void userShouldBeAbleToClickAllTeacher() {
-        homePage.allTeachers.click ();
-        SeleniumUtil.pause (2);
-        allTeachersPage.listToggleButton.click ();
+    @And("Click first teacher")
+    public void clickFirstStudent() {
+        SeleniumUtil.pause (3);
+        allTeachersPage.firstTeacher.click ();
 
     }
 
-    @When("User should be able to find her profile on table")
-    public void userShouldBeAbleToFindHerProfileOnTable() {
-        SeleniumUtil.pause (2);
-        teachersListPage.headerTableID.click ();
-        SeleniumUtil.pause (2);
-        teachersListPage.headerTableID.click ();
-        SeleniumUtil.pause (2);
 
-    }
 
-    @And("User should be able to click edit button")
-    public void userShouldBeAbleToClickEditButton() {
-        teachersListPage.editButton.click ();
-    }
-
-    @When("User should be able to update email")
-    public void userInputNewEmailAddress() {
-        addteacherPage.email.click ();
+    @And("Click edit button on the first teacher")
+    public void clickEditButtonOnTheFirstStudent() {
         SeleniumUtil.pause (1);
-        addteacherPage.email.clear ();
-        String email = faker.internet ().emailAddress ();
-        TemporaryStorage.addData ("EMAIL_ADDRESS_UPDATED" , email);
-        addteacherPage.email.sendKeys (email);
+        allTeachersPage.threeDots.click ();
+        SeleniumUtil.pause (1);
+        allTeachersPage.edit.click ();
+
+    }
+
+    @When("Get ID from teacher profile page")
+    public void getIDFromTeacherProfilePage() {
+        SeleniumUtil.pause (2);
+        TemporaryStorage.addData ("ID_firstTeacher" , profilePage.ID.getText ());
+    }
+
+
+    @When("Update teacher subject and submit")
+    public void updateTeacherSubjectAndSubmit() {
+
+        SeleniumUtil.pause (1);
+        addteacherPage.subject.click ();
+        SeleniumUtil.pause (1);
+        addteacherPage.subject.clear ();
+        String subject = faker.educator ().course ();
+        TemporaryStorage.addData ("SUBJECT_UPDATED" , subject);
+        addteacherPage.subject.sendKeys (subject);
         JavascriptExecutor js = ( (JavascriptExecutor) Driver.getDriver () );
         js.executeScript ("window.scrollBy(0,document.body.scrollHeight || document.documentElement.scrollHeight)" , "");
         SeleniumUtil.pause (2);
         addteacherPage.submitButton.click ();
-
-
     }
 
+
     @Then("Teacher should be updated on the profile page")
-    public void teacherShouldBeUpdatedOnTheProfilePage() {
+    public void studentShouldBeUpdatedOnTheProfilePage() {
         JavascriptExecutor js = ( (JavascriptExecutor) Driver.getDriver () );
         js.executeScript ("window.scrollBy(0,document.body.scrollHeight || document.documentElement.scrollHeight)" , "");
         SeleniumUtil.pause (2);
         allTeachersPage.lastCreatedTeacher.click ();
         SeleniumUtil.pause (2);
-        String ID = profilePage.email.getText ();
-        Assert.assertEquals (profilePage.email.getText (),(TemporaryStorage.getData ("EMAIL_ADDRESS_UPDATED")));
-    }
-
-    @Then("Teacher should be updated on the teacher list")
-    public void teacherShouldBeUpdatedOnTheTeacherList() {
-        JavascriptExecutor jse = (JavascriptExecutor) Driver.getDriver ();
-        jse.executeScript ("window.history.go(-1)");
-        JavascriptExecutor js = ( (JavascriptExecutor) Driver.getDriver () );
-        SeleniumUtil.pause (2);
-        js.executeScript ("window.scrollBy(0,-document.body.scrollHeight || -document.documentElement.scrollHeight)" , "");
-        allTeachersPage.listToggleButton.click ();
-        SeleniumUtil.pause (2);
-        SeleniumUtil.pause (2);
-        teachersListPage.headerTableID.click ();
-        SeleniumUtil.pause (2);
-        teachersListPage.headerTableID.click ();
-        SeleniumUtil.pause (2);
-        Assert.assertEquals (teachersListPage.firstColumntableEmail.getText ()
-                ,TemporaryStorage.getData ("EMAIL_ADDRESS_UPDATED"));
-
+        String ID = profilePage.subject.getText ();
+        Assert.assertEquals (profilePage.subject.getText () , ( TemporaryStorage.getData ("SUBJECT_UPDATED") ));
     }
 
     @Then("Teacher should be updated on the database")
-    public void teacherShouldBeUpdatedOnTheDatabase() throws SQLException {
-
+    public void studentShouldBeUpdatedOnTheDatabase() throws SQLException {
         DBUtility.createConnection ();
 
         List<Map<Object, Object>> data =
-                DBUtility.executeQuery ("select EMAIL_ADDRESS from teacher");
+                DBUtility.executeQuery ("select FIRST_NAME,TEACHER_ID,SUBJECT from teacher");
 
-        DBUtility.close ();
+
         boolean result = false;
         for (Map<Object, Object> map : data) {
-            if (map.get ("EMAIL_ADDRESS").toString ().equals (TemporaryStorage.getData ("EMAIL_ADDRESS_UPDATED"))) {
-                result =true;
+
+            if (map.get ("TEACHER_ID").toString ().equals (TemporaryStorage.getData ("ID_firstTeacher"))
+                    && ( map.get ("SUBJECT").toString ().equals (TemporaryStorage.getData ("SUBJECT_UPDATED")) )) {
+
+                result = true;
                 break;
             }
         }
+
+        DBUtility.close ();
+
         Assert.assertTrue (result);
 
     }
 
-// TEACHER DELETING SCENARIO
 
-    @And("User should be able to click delete button")
-    public void userShouldBeAbleToClickDeleteButton() {
+    @When("Click All Teacher")
+    public void clickAllStudent() {
         SeleniumUtil.pause (2);
-        teachersListPage.deleteButton.click ();
+        homePage.allTeachers.click ();
     }
 
-
-    @When("User should be able to click alert box delete button")
-    public void userShouldBeAbleToClickAlertBoxDeleteButton() {
-        SeleniumUtil.pause (2);
-        teachersListPage.deleteAlertButton.click ();
-
+    @And("Click delete button on the first teacher")
+    public void clickDeleteButtonOnTheFirstStudent() {
+        SeleniumUtil.pause (1);
+        allTeachersPage.threeDots.click ();
+        SeleniumUtil.pause (1);
+        allTeachersPage.delete.click ();
     }
 
-    @Then("Teacher should NOT be displayed on the be displayed on teacher grid")
-    public void teacherShouldNOTBeDisplayedOnTheBeDisplayedOnTeacherGrid() {
-        JavascriptExecutor js = ( (JavascriptExecutor) Driver.getDriver () );
-        js.executeScript ("window.scrollBy(0,document.body.scrollHeight || document.documentElement.scrollHeight)" , "");
-        SeleniumUtil.pause (2);
-        Assert.assertTrue (allTeachersPage.lastCreatedTeacher.isDisplayed ());
-        SeleniumUtil.pause (2);
-        js.executeScript ("window.scrollBy(0,-document.body.scrollHeight || -document.documentElement.scrollHeight)" , "");
-        allTeachersPage.lastCreatedTeacher.click ();
-        String ID = profilePage.ID.getText ();
-        TemporaryStorage.addData ("ID" , ID);
-        JavascriptExecutor jse = (JavascriptExecutor) Driver.getDriver ();
-        jse.executeScript ("window.history.go(-1)");
+    @When("Click delete button on the teacher alert box")
+    public void clickDeleteButtonOnTheTeacherAlertBox() {
+
+        SeleniumUtil.pause (1);
+        allTeachersPage.alertDelete.click ();
 
     }
 
-    @Then("Teacher should NOT be displayed by search on the teacher list")
-    public void teacherShouldNOTBeDisplayedBySearchOnTheTeacherList() {
+    @When("Click teacher list toggle button")
+    public void clickListToggleButton() {
+        SeleniumUtil.pause (1);
+        allTeachersPage.listButton.click ();
 
-        SeleniumUtil.pause (2);
-        teachersListPage.headerTableID.click ();
-        SeleniumUtil.pause (2);
-        teachersListPage.headerTableID.click ();
-        SeleniumUtil.pause (2);
-        Assert.assertNotEquals (teachersListPage.firstColumnTableID.getText () , TemporaryStorage.getData ("ID"));
+    }
 
+
+    @Then("Teacher should NOT be found on list")
+    public void studentShouldNOTBeFoundOnList() {
+
+        //     List<WebElement> list = Driver.getDriver ().findElements (By.xpath ("//tbody/tr[1]"));
+        //    6181 Female math 14 union IT 09/01/2020 tommie.jakubowski@hotmail.com 2244198787 // gets everthing in row 1st
+
+        boolean result = false;
+        List<WebElement> list = Driver.getDriver ().findElements (By.xpath ("//tbody/tr/td[2]"));
+
+        SeleniumUtil.pause (1);
+        for (int i = 0; i<list.size () ; i++) {
+            System.out.println (list.get (i).getText ());
+            if (!list.get (i).getText ().equals (TemporaryStorage.getData ("ID_firstTeacher"))){
+                result = true;
+            }
+        }
+        System.out.println (TemporaryStorage.getData ("ID_firstTeacher"));
+        Assert.assertTrue (result);
     }
 
     @Then("Teacher should be deleted on the database")
-    public void teacherShouldBeDeletedOnTheDatabase() throws SQLException {
+    public void studentShouldBeDeletedOnTheDatabase() throws SQLException {
+
         DBUtility.createConnection ();
 
         List<Map<Object, Object>> data =
                 DBUtility.executeQuery ("select TEACHER_ID from teacher");
-        DBUtility.close ();
+
+
         boolean result = false;
         for (Map<Object, Object> map : data) {
-            if (map.get ("TEACHER_ID").toString ().equals (TemporaryStorage.getData ("ID"))) {
-                result =false;
-                break;
-            } else {
-                result = true;
-            }
 
+            if (!map.get ("TEACHER_ID").toString ().equals (TemporaryStorage.getData ("ID_firstTeacher"))){
+                result = true;
+
+            }
         }
+
+        DBUtility.close ();
+
         Assert.assertTrue (result);
+
+
     }
 
 
 
 }
-
-
-
-

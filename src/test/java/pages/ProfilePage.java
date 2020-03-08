@@ -20,5 +20,11 @@ public class ProfilePage{
     public WebElement email;
 
 
+    @FindBy (xpath = "//ul/li[7]/span[2]")
+    public WebElement subject;
+
+    @FindBy (xpath ="//div[@class=\"profile-info-left\"]/h3")
+    public WebElement fullName;
+
 
 }

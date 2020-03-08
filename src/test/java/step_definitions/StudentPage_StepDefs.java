@@ -8,7 +8,6 @@ import com.github.javafaker.Faker;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import cucumber.api.java.eo.Se;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -265,7 +264,7 @@ public class StudentPage_StepDefs{
 
     }
 
-    @When("Update email and submit")
+    @When("Update subject and submit")
     public void updateEmailAndSubmit() {
         SeleniumUtil.pause (1);
         addstudentPage.subject.click ();
