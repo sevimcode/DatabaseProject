@@ -249,7 +249,7 @@ public class StudentPage_StepDefs{
 
     @When("Get ID from profile page")
     public void getIDFromProfilePage() {
-        SeleniumUtil.pause (2);
+        SeleniumUtil.pause (4);
         TemporaryStorage.addData ("ID_firstStudent" , profilePage.ID.getText ());
         TemporaryStorage.addData ("FULLNAME_firstStudent", profilePage.fullName.getText ());
 
