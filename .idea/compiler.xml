@@ -11,7 +11,11 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="8">
+<<<<<<< HEAD
+      <module name="DatabaseProject" target="1.8" />
+=======
       <module name="DatabaseProject" target="7" />
+>>>>>>> master
     </bytecodeTargetLevel>
   </component>
 </project>
